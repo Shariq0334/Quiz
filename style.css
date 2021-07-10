@@ -3,23 +3,9 @@ ul {
 }
 ul > li {
     font-size: 30px;
+    margin-top: .5em;
     
 }
-.radio {
-    /* // ...existing styles */
-  
-    /* display: grid;
-    grid-template-columns: min-content auto;
-    grid-gap: 1em; */
-  }
-  
-  /* .radio__input {
-    display: flex;
-     
-  }
-
-  .radio__control {
-    
-    display: -ms-grid ;
-
-  } */
+input {
+    cursor: pointer;
+}

@@ -3,6 +3,18 @@ const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 var score = 0;
 var total = 100;
+var results = document.getElementById("results")
+var quiz = document.getElementById("quiz")
+var name = document.getElementById("name")
+function named (){
+  console.log(name.value)
+}
+
+
+if (name.value === ""){
+ btn= document.getElementById("quizbtn")
+ btn.disabled = true;
+}
 
 var Questions = [
     {
@@ -118,61 +130,68 @@ var Questions = [
   var option2 = document.querySelector("#option2")
   var option3 = document.querySelector("#option3")
   var option4 = document.querySelector("#option4")
-  var answers = document.querySelectorAll(".answer")
+  var quest= document.getElementById("quest")
 
-  function nextQuestion(){
-   var quest= document.getElementById("quest")
-    // quest.innerText = ("Q. " + Questions[index].question)
-    // console.log(Questions[0].question)
+  var answers = document.querySelectorAll(".answer")
+  console.log(Questions[index] )
+
+  function loadQuestion(){
+   
     console.log(Questions[index].question)
     quest.innerText = Questions[index].question
     option1.innerText = Questions[index].answers.a
     option2.innerText = Questions[index].answers.b
     option3.innerText = Questions[index].answers.c
-    option4.innerText = Questions[index].answers.d
-    
-    // deSelectAll()
-    index = index + 1
-    if (index == Questions.length){
-      var quiz = document.getElementById("quiz")
-      quiz.style.display= "none"
-      var results = document.getElementById("results")
-      results.style.display = "block"
-      results.innerHTML =  `<h1> You Scored ${score}  </h1>`
-      if (score > 60){
+    option4.innerText = Questions[index].answers.d 
+  }
+  loadQuestion();
 
-      results.innerHTML =  `
-      <h1> Total Score is ${total}  </h1>
-      <h1> You Scored ${score}  </h1> 
-      <h1> Congratulations You Are Passed </h1>
-                                                `
-      }
-      else {
-        results.innerHTML =  `<h1> Total Score is ${total}  </h1> 
-        <h1> You Scored ${score}  </h1> 
-        <h1> You are failed </h1>
-        <h1> Better Luck Next Time</h1>
-        `
-      }
+
+  function nextQuestion(){
+    var checkedAnswer = getAnswer()
+    console.log(checkedAnswer)
+    if (checkedAnswer === Questions[index].correctAnswer){
+       score +=10
+       console.log(score)
+      };
+    index ++
+    deSelectAll()
+    if (index < Questions.length){
+      loadQuestion()
+    }
+    else {
+      
+      quiz.style.display = "none"
+      results.style.display = "block"
+
+        results.innerHTML =  `<h1> You Scored ${score}  </h1>`
+  if (score >= 60){
+
+  results.innerHTML =  `
+  <h1> Total Score is ${total}  </h1>
+  <br>
+  <h1> You Scored ${score}  </h1> 
+  <br>
+  <h1> Congratulations ${name} You Are Passed </h1>
+                                            `
+  }
+  else {
+    results.innerHTML =  `<h1> Total Score is ${total}  </h1> 
+    <br>
+    <h1> You Scored ${score}  </h1> 
+    <br>
+    <h1> You are failed </h1>
+    <br>
+    <h1> Better Luck Next Time ${name}</h1>
+    `
+  }
+
+
     }
 
-console.log(Questions[index])
-    console.log(Questions[index].correctAnswer)
-
-   {var checkedAnswer = getAnswer()
-   console.log(checkedAnswer)
-   if (checkedAnswer === Questions[index].correctAnswer){
-     score ++
-     console.log(score)
-   }
-   else{
-     console.log("not scoreed")
-   }
-   }
-    
-   
   }
-  nextQuestion()
+
+ 
  
 
   function getAnswer (){
@@ -180,8 +199,14 @@ console.log(Questions[index])
     answers.forEach(function(currentElement) {
            if(currentElement.checked){
              answer = currentElement.id;
-           }
-      
+           }    
+          //  if (!currentElement.checked ){
+          //    btu = document.getElementById("next").disabled = true
+          //    console.log(btu)
+          //  }
+          //  else if (currentElement.checked) {
+          //   btu = document.getElementById("next").disabled = false
+          //  }
     });
    
     return answer
@@ -192,3 +217,43 @@ function deSelectAll (){
     currentElement.checked = false
     })
 }
+
+
+// deSelectAll()
+// index = index + 1
+// if (index == Questions.length){
+//   var quiz = document.getElementById("quiz")
+//   quiz.style.display= "none"
+//   var results = document.getElementById("results")
+//   results.style.display = "block"
+//   results.innerHTML =  `<h1> You Scored ${score}  </h1>`
+//   if (score > 60){
+
+//   results.innerHTML =  `
+//   <h1> Total Score is ${total}  </h1>
+//   <h1> You Scored ${score}  </h1> 
+//   <h1> Congratulations You Are Passed </h1>
+//                                             `
+//   }
+//   else {
+//     results.innerHTML =  `<h1> Total Score is ${total}  </h1> 
+//     <h1> You Scored ${score}  </h1> 
+//     <h1> You are failed </h1>
+//     <h1> Better Luck Next Time</h1>
+//     `
+//   }
+// }
+
+// console.log(Questions[index])
+// console.log(Questions[index].correctAnswer)
+
+// {var checkedAnswer = getAnswer()
+// console.log(checkedAnswer)
+// if (checkedAnswer === Questions[index].correctAnswer){
+//  score ++
+//  console.log(score)
+// }
+// else{
+//  console.log("not scoreed")
+// }
+// }
