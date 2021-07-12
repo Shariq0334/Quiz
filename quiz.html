@@ -35,7 +35,7 @@
         <div class="card-header">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
-              <a class="nav-link active" href="/index.html">Back</a>
+              <button onclick="window.location.href = 'index.html' " class="nav-link active" href="/index.html">Back</button>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Link</a>
@@ -47,11 +47,13 @@
         </div>
         <br><br>
 
+        <h1 id="demo"></h1>
+
 
         <div style="display: flex; justify-content: center;" id="quiz">
           <div class="form-check">
             <h1 id="quest" ></h1>
-            <br><br>
+            
            <ul>
              <li>
                <input type="radio" name="answer" id="answer1" class="answer radio" >
@@ -73,6 +75,7 @@
             <br><br>
             <button class="btn btn-primary" onclick="nextQuestion()" id="next">Next</button>
           </div>
+         
           
 
           
@@ -81,6 +84,7 @@
         </div>
         
         <div style="display: none;" id="results">
+          <h1>Please Check Some Answers</h1>
           
         </div>
 

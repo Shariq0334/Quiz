@@ -6,15 +6,33 @@ var total = 100;
 var results = document.getElementById("results")
 var quiz = document.getElementById("quiz")
 var name = document.getElementById("name")
-function named (){
-  console.log(name.value)
-}
 
 
-if (name.value === ""){
- btn= document.getElementById("quizbtn")
- btn.disabled = true;
+function named(){
+  window.location.href = "quiz.html"
+  var mane = document.getElementById("name").value
+  localStorage.setItem("name",mane)
+
 }
+function getUser(){
+  var names = localStorage.getItem("name");
+
+  return names;
+
+  
+  
+}
+User_Name = getUser()
+console.log(User_Name)
+
+
+  
+
+
+// if (name.value === ""){
+//  btn= document.getElementById("quizbtn")
+//  btn.disabled = true;
+// }
 
 var Questions = [
     {
@@ -68,58 +86,59 @@ var Questions = [
       correctAnswer: "answer4"
     },
     {
-        question: "Which tool can you use to ensure code quality?",
+        question: "Hyper Text Markup Language Stand For??",
         answers: {
-          a: "Angular",
-          b: "jQuery",
-          c: "RequireJS",
-          d: "ESLint"
+          a: "HTML",
+          b: "CSS",
+          c: "JAVASCRIPT",
+          d: "XHTML"
+        },
+        correctAnswer: "answer1"
+      },
+      {
+        question: "Which language is used for styling web pages?",
+        answers: {
+          a: "Node.js",
+          b: "TypeScript",
+          c: "HTML",
+          d: "CSS"
         },
         correctAnswer: "answer4"
       },
       {
-        question: "Which one of these is a JavaScript package manager?",
+        question: "What is 30/3?",
         answers: {
-          a: "Node.js",
-          b: "TypeScript",
-          c: "npm",
-          d: "ESLint"
+          a: "10",
+          b: "15",
+          c: "5",
+          d: "8"
+        },
+        correctAnswer: "answer1"
+      },
+      {
+        question: "Which is not a JavaScript Framework?",
+        answers: {
+          a: "Phyton script",
+          b: "JQUERY",
+          c: "Django",
+          d: "Nodejs"
         },
         correctAnswer: "answer3"
       },
       {
-        question: "Who invented JavaScript?",
+        question: "Which is used for Connect To Database?",
         answers: {
-          a: "Douglas Crockford",
-          b: "Sheryl Sandberg",
-          c: "Brendan Eich",
-          d: "ESLint"
+          a: "PHP",
+          b: "HTML",
+          c: "CSS",
+          d: "ALL"
         },
-        correctAnswer: "answer3"
-      },
-      {
-        question: "Which one of these is a JavaScript package manager?",
-        answers: {
-          a: "Node.js",
-          b: "TypeScript",
-          c: "npm",
-          d: "ESLint"
-        },
-        correctAnswer: "answer3"
-      },
-      {
-        question: "Which tool can you use to ensure code quality?",
-        answers: {
-          a: "Angular",
-          b: "jQuery",
-          c: "RequireJS",
-          d: "ESLint"
-        },
-        correctAnswer: "answer4"
+        correctAnswer: "answer1"
       },
 
 
   ];
+ 
 
 
 
@@ -163,6 +182,9 @@ var Questions = [
       
       quiz.style.display = "none"
       results.style.display = "block"
+      time =document.getElementById("demo")
+      time.style.display = "none"
+    }
 
         results.innerHTML =  `<h1> You Scored ${score}  </h1>`
   if (score >= 60){
@@ -170,26 +192,36 @@ var Questions = [
   results.innerHTML =  `
   <h1> Total Score is ${total}  </h1>
   <br>
-  <h1> You Scored ${score}  </h1> 
+  <h1>${User_Name} You Scored ${score}  </h1> 
   <br>
-  <h1> Congratulations ${name} You Are Passed </h1>
+  <h1> Congratulations  ${User_Name} You Are Passed </h1>
                                             `
+  }
+  else if (score <= 60){
+    results.innerHTML =  `<h1> Total Score is ${total}  </h1> 
+    <br>
+    <h1>${User_Name} You Scored ${score}  </h1> 
+    <br>
+    <h1> ${User_Name} You are failed </h1>
+    <br>
+    <h1> Better Luck Next Time  ${User_Name}</h1>
+    `
   }
   else {
     results.innerHTML =  `<h1> Total Score is ${total}  </h1> 
     <br>
-    <h1> You Scored ${score}  </h1> 
+    <h1>${User_Name} You Scored ${score}  </h1> 
     <br>
-    <h1> You are failed </h1>
+    <h1> ${User_Name} You are failed </h1>
     <br>
-    <h1> Better Luck Next Time ${name}</h1>
+    <h1> Better Luck Next Time ${User_Name} </h1>
     `
   }
 
 
     }
 
-  }
+  
 
  
  
@@ -198,8 +230,11 @@ var Questions = [
     var answer;
     answers.forEach(function(currentElement) {
            if(currentElement.checked){
-             answer = currentElement.id;
-           }    
+                 answer = currentElement.id
+           console.log(answer)
+             
+           } 
+            
           //  if (!currentElement.checked ){
           //    btu = document.getElementById("next").disabled = true
           //    console.log(btu)
@@ -218,42 +253,39 @@ function deSelectAll (){
     })
 }
 
+function startTimer(duration, display) {
+  var timer = duration, minutes, seconds;
+  setInterval(function () {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
 
-// deSelectAll()
-// index = index + 1
-// if (index == Questions.length){
-//   var quiz = document.getElementById("quiz")
-//   quiz.style.display= "none"
-//   var results = document.getElementById("results")
-//   results.style.display = "block"
-//   results.innerHTML =  `<h1> You Scored ${score}  </h1>`
-//   if (score > 60){
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-//   results.innerHTML =  `
-//   <h1> Total Score is ${total}  </h1>
-//   <h1> You Scored ${score}  </h1> 
-//   <h1> Congratulations You Are Passed </h1>
-//                                             `
-//   }
-//   else {
-//     results.innerHTML =  `<h1> Total Score is ${total}  </h1> 
-//     <h1> You Scored ${score}  </h1> 
-//     <h1> You are failed </h1>
-//     <h1> Better Luck Next Time</h1>
-//     `
-//   }
-// }
+      display.textContent = minutes + ":" + seconds;
+      --timer;
+      if (minutes == 0 && seconds == 0){
+      // var checkedAnswer = getAnswer()
+      //     if (checkedAnswer === Questions[index].correctAnswer){
+      //      score ++
+      //      console.log(score)
+      //     }// console.log(checkedAnswer)
+          
+        quiz.style.display = "none"
+        results.style.display = "block"
+        displayy = document.querySelector('#demo');
+        displayy.style.display = "none"
 
-// console.log(Questions[index])
-// console.log(Questions[index].correctAnswer)
+      }
 
-// {var checkedAnswer = getAnswer()
-// console.log(checkedAnswer)
-// if (checkedAnswer === Questions[index].correctAnswer){
-//  score ++
-//  console.log(score)
-// }
-// else{
-//  console.log("not scoreed")
-// }
-// }
+      
+  }, 1000);
+}
+
+window.onload = function () {
+  var threeMinutes = 60 * 3,
+      displayy = document.querySelector('#demo');
+  startTimer(threeMinutes, displayy);
+};
+console.log(score)
+
